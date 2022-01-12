@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Roboto">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Sofia">
+
+<link rel="stylesheet" th:href="@{/css/facultyregistration.css}">
+<title>faculty registration</title>
+</head>
+<body>
+	<div class="container form-container">
+		<h1 style="margin-bottom: 50px" class="h1">Faculty Registration</h1>
+	    <h6 id="message" th:text="${message}" class="text-center text-danger"></h6>
+	
+		<form th:action="@{/faculty/save}" method="post" th:object="${faculty}"
+				                                 onsubmit="return validateFacultyForm(this)">
+			<input type="hidden" th:field=*{id}/>
+			<div>
+				<input type="text" placeholder="First Name" th:field="*{firstName}" />
+			</div>
+			<div>
+				<input type="text" name="lastName" placeholder="Last Name" th:field="*{lastName}" />
+			</div>
+			<div>
+				<input type="text" placeholder="Reg. ID" style="text-transform:uppercase" th:field="${faculty.regId}" id="reg" minlength="5" maxlength="20"  disabled autocomplete="off"/>
+			    <input type="hidden" placeholder="Reg. ID" style="text-transform:uppercase" th:field="*{regId}" minlength="5" maxlength="20" autocomplete="off"/>
+			</div>
+			<div>
+				<input type="text" placeholder="Designation"
+					th:field="*{designation}" />
+			</div>
+			<br>
+            <div>
+                 <select th:field="*{department}">
+                    <option disabled value="">Select Department</option>
+                    <option th:value="'CSE'" th:selected="${department=='CSE'}">CSE</option>
+                    <option th:value="'ECE'" th:selected="${department=='ECE'}">ECE</option>
+                    <option th:value="'EEE'" th:selected="${department=='EEE'}">EEE</option>
+                    <option th:value="'H&S'" th:selected="${department=='H&S'}">H&S</option>
+                    <option th:value="'CIVIL'" th:selected="${department=='CIVIL'}">CIVIL</option>
+                    <option th:value="'MECHANICAL'" th:selected="${department=='MECHANICAL'}">MECHANICAL</option>
+                </select>
+            </div>
+            <br>
+			<div th:if="${id != null}">
+				<input type="password" id="password1"
+					placeholder="change password, if needed!" th:field="*{password}" />
+			</div>
+			     
+			<br>			
+			  <button type="submit" class="button">Update</button>
+		</form>
+
+</div>
+
+	<script>
+	
+	function validateForm(form){
+	
+	return true;
+	}
+	
+   </script>
+</body>
+
+</html>

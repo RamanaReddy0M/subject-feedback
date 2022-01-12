@@ -1,0 +1,366 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
+<link th:href="@{/webjars/bootstrap-icons/1.7.0/font/bootstrap-icons.css}"
+	rel="stylesheet" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/adminfaculty.css}">
+
+<script type="text/javascript"
+	th:src="@{/webjars/jquery/3.6.0/dist/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+<script type="text/javascript" th:src="@{/js/adminhome.js}"></script>
+
+<title>[[${title}]]</title>
+<link rel="icon" type="image/png/ico" sizes="32x32" th:href="@{/favicon.ico}">
+
+<style>
+
+/* Bar Graph Vertical */
+.bar-graph .year {
+  -webkit-animation: fade-in-text 2.2s 0.1s forwards;
+  -moz-animation: fade-in-text 2.2s 0.1s forwards;
+  animation: fade-in-text 2.2s 0.1s forwards;
+}
+
+.bar-graph-vertical {
+  margin-top: 80px;
+  max-width: 680px;
+  padding-left: 5px;
+}
+
+.bar-graph-vertical .bar-container {
+  float: left;
+  height: 180px;
+  margin-right: 8px;
+  position: relative;
+  text-align: center;
+  width: 45px;
+  
+}
+
+.bar-graph-vertical .bar {
+
+  border-radius: 3px;
+  bottom: 40px;
+  position: absolute;
+  width: 46px;
+}
+
+.bar-graph-vertical .year {
+  bottom: 0;
+  left: 0;
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
+}
+
+.bar-graph-two .bar::after {
+  -webkit-animation: fade-in-text 2.2s 0.1s forwards;
+  -moz-animation: fade-in-text 2.2s 0.1s forwards;
+  animation: fade-in-text 2.2s 0.1s forwards;
+  color: #fff;
+  content: attr(data-percentage);
+  font-weight: 450;
+  left: 2px;
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
+  text-align: left;
+  top: 0px;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+
+.bar-graph-two .bar-one .bar {
+  background-color: navy;
+  -webkit-animation: show-bar-one-vertical 1.2s 0.1s forwards;
+  -moz-animation: show-bar-one-vertical 1.2s 0.1s forwards;
+  animation: show-bar-one-vertical 1.2s 0.1s forwards;
+}
+
+.bar-graph-two .bar-two .bar {
+  background-color: navy;
+  -webkit-animation: show-bar-two-vertical 1.2s 0.2s forwards;
+  -moz-animation: show-bar-two-vertical 1.2s 0.2s forwards;
+  animation: show-bar-two-vertical 1.2s 0.2s forwards;
+}
+
+.bar-graph-two .bar-three .bar {
+  /* background-color: #407286; */
+  background-color: navy;
+  -webkit-animation: show-bar-three-vertical 1.2s 0.3s forwards;
+  -moz-animation: show-bar-three-vertical 1.2s 0.3s forwards;
+  animation: show-bar-three-vertical 1.2s 0.3s forwards;
+}
+
+.bar-graph-two .bar-four .bar {
+  /* background-color: #2e515f; */
+  background-color: navy;
+  -webkit-animation: show-bar-four-vertical 1.2s 0.4s forwards;
+  -moz-animation: show-bar-four-vertical 1.2s 0.4s forwards;
+  animation: show-bargb(0, 0, 128)ur-vertical 1.2s 0.4s forwards;
+}
+
+.bar-graph-two .bar-five .bar {
+  background-color:  #013220;
+  -webkit-animation: show-bar-four-vertical 1.2s 0.5s forwards;
+  -moz-animation: show-bar-four-vertical 1.2s 0.5s forwards;
+  animation: show-bar-four-vertical 1.2s 0.5s forwards;
+}
+
+/* Bar Graph Vertical Animations */
+@-webkit-keyframes show-bar-one-vertical {
+  0% {
+    height: 0;
+  }
+  
+}
+
+@-webkit-keyframes show-bar-two-vertical {
+  0% {
+    height: 0;
+  }
+ 
+}
+
+@-webkit-keyframes show-bar-three-vertical {
+  0% {
+    height: 0;
+  }
+  
+}
+
+@-webkit-keyframes show-bar-four-vertical {
+  0% {
+    height: 0;
+  }
+  
+}
+
+@-webkit-keyframes show-bar-five-vertical {
+  0% {
+    height: 0;
+  }
+  
+}
+
+@-webkit-keyframes fade-in-text {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.section1{
+display: flex;
+justify-content: center;
+
+}
+.inside_section1{
+box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+.questions{
+padding: 10px 0;
+box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+.remarks{
+box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+.remark{
+padding: 0px 10px;
+}
+.box{
+margin: 10px 0px;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+</style>
+	
+
+</head>
+
+<body id="body-pd">
+	<!-- <header th:replace="fragments :: header"></header> -->
+	<header th:fragment="header" class="header" id="header">
+		<div class="header_toggle">
+			<i class='bi bi-list' id="header-toggle"></i>
+		</div>
+		
+		<div class="header_img">
+		 <a th:href="@{${faculty.imagePath}}">
+			<img th:alt="${faculty.firstName}+' '+${faculty.lastName}" th:src="@{${faculty.imagePath}}"
+			      style="object-fit:cover;object-position: center center">
+	     </a> 
+		</div>
+		<form th:action="@{/logout}" method="post" th:hidden="true"
+			id="logoutForm" name="logoutForm">
+			<input type="submit" />
+		</form>
+	</header>
+	<div th:replace="fragments :: navbar"></div>
+	<!--Container Main start-->
+	<div class="height-100 bg-light" style="padding:0;margin:0;left:0;">
+	<div th:if="${#maps.isEmpty(subjectMap)}">
+	 <h1>You have no feedback from students.</h1>
+	 
+	 <h5 class="" style="color: navy;margin: 15px 0;font-weight: 700">Reasons might be one of the following..</h5>
+	 <p>1. No subjects were taught by you.</p>
+	 <p>2. If you teach any subject(s), then no feedback have been provided to your subject(s).</p>
+	 <p>3. If feedback has been given by the students, Respected HOD may not have calculated the averages. </p>
+	 </div>
+	   <div class="card box" th:if="${subjectMap != null}" th:each="subjectMap: ${subjectMap}">
+		 <h4 style="padding:5px 10px;">[[${subjectMap.key.subjectName}]]</h4>
+			
+		    <div class="section1">
+		    
+		     <div class="inside_section1">
+		      
+		      <!-- <div>
+		      	<h4 class="text-center">[[${subjectMap.key.subjectName}]]</h4>
+		      </div> -->
+				  <section class="bar-graph bar-graph-vertical bar-graph-two">
+				  <!-- Question 1  -->
+					  <div class="bar-one bar-container">
+					  	<div  th:if="${subjectMap.value.q[0] >= 90}"  class="bar"  th:style="'height:'+${subjectMap.value.q[0]}+'%;background-color:navy'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[0], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[0] >= 80 && subjectMap.value.q[0] < 90 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[0]}+'%;background-color:#195905'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[0], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[0] >= 70 && subjectMap.value.q[0] < 80 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[0]}+'%;background-color:#004953'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[0], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[0] >= 60 && subjectMap.value.q[0] < 70 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[0]}+'%;background-color:#679267'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[0], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[0] >= 50 && subjectMap.value.q[0] < 60 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[0]}+'%;background-color:#A0D6B4'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[0], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[0] < 50 }"  class="bar bg-danger"  th:style="'height:'+${subjectMap.value.q[0]}+'%'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[0], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <span class="year" style="color: #36454f"><b>Q1</b></span>
+					  </div>
+					  
+					  
+				<!-- Question 2  -->
+					  <div class="bar-two bar-container">
+					    <div  th:if="${subjectMap.value.q[1] >= 90}"  class="bar"  th:style="'height:'+${subjectMap.value.q[1]}+'%;background-color: navy'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[1], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[1] >= 80 && subjectMap.value.q[1] < 90 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[1]}+'%;background-color:#195905'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[1], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[1] >= 70 && subjectMap.value.q[1] < 80 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[1]}+'%;background-color:#004953'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[1], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[1] >= 60 && subjectMap.value.q[1] < 70 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[1]}+'%;background-color:#679267'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[1], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[1] >= 50 && subjectMap.value.q[1] < 60 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[1]}+'%;background-color:#A0D6B4'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[1], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[1] < 50 }"  class="bar bg-danger"  th:style="'height:'+${subjectMap.value.q[1]}+'%'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[1], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <span class="year" style="color: #3b3c36"><b>Q2</b></span>
+					  </div>
+					   
+					  
+			   <!-- Question 3  -->
+					  <div class="bar-three bar-container">
+					    <div  th:if="${subjectMap.value.q[2] >= 90}"  class="bar"  th:style="'height:'+${subjectMap.value.q[2]}+'%;background-color: navy'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[2], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[2] >= 80 && subjectMap.value.q[2] < 90 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[2]}+'%;background-color:#195905'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[2], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[2] >= 70 && subjectMap.value.q[2] < 80 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[2]}+'%;background-color:#004953'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[2], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[2] >= 60 && subjectMap.value.q[2] < 70 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[2]}+'%;background-color:#679267'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[2], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[2] >= 50 && subjectMap.value.q[2] < 60 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[2]}+'%;background-color:#A0D6B4'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[2], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[2] < 50 }"  class="bar bg-danger"  th:style="'height:'+${subjectMap.value.q[2]}+'%'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[2], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <span class="year" style="color:#1a1110"><b>Q3</b></span>
+					  </div>
+					   
+					  
+			 <!-- Question 4  -->
+					  <div class="bar-four bar-container">
+					  	<div  th:if="${subjectMap.value.q[3] >= 90}"  class="bar"  th:style="'height:'+${subjectMap.value.q[3]}+'%;background-color:navy'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[3], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[3] >= 80 && subjectMap.value.q[3] < 90 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[3]}+'%;background-color:#195905'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[3], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[3] >= 70 && subjectMap.value.q[3] < 80 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[3]}+'%;background-color:#004953'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[3], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[3] >= 60 && subjectMap.value.q[3] < 70 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[3]}+'%;background-color:#679267'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[3], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[3] >= 50 && subjectMap.value.q[3] < 60 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[3]}+'%;background-color:#A0D6B4'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[3], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[3] < 50 }"  class="bar bg-danger"  th:style="'height:'+${subjectMap.value.q[3]}+'%'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[3], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <span class="year" style="color:#002147"><b>Q4</b></span>
+					  </div>
+					  
+					  
+			<!-- Question 5  -->
+					   <div class="bar-five bar-container">
+					    <div  th:if="${subjectMap.value.q[4] >= 90}"  class="bar"  th:style="'height:'+${subjectMap.value.q[4]}+'%;background-color: navy'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[4], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[4] >= 80 && subjectMap.value.q[4] < 90 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[4]}+'%;background-color:#195905'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[4], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[4] >= 70 && subjectMap.value.q[4] < 80 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[4]}+'%;background-color:#004953'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[4], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[4] >= 60 && subjectMap.value.q[4] < 70 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[4]}+'%;background-color:#679267'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[4], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[4] >= 50 && subjectMap.value.q[4] < 60 }"  class="bar"  th:style="'height:'+${subjectMap.value.q[4]}+'%;background-color:#A0D6B4'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[4], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <div  th:if="${subjectMap.value.q[4] < 50 }"  class="bar bg-danger"  th:style="'height:'+${subjectMap.value.q[4]}+'%'"  th:data-percentage="${#numbers.formatDecimal(subjectMap.value.q[4], 0, 'DEFAULT', 0, 'DEFAULT')+'%'}"></div>
+					    <span class="year" style="color:#100c08"><b>Q5</b></span>
+					  </div>
+					  
+					</section>
+					
+				</div>
+		    </div>
+		    <div class="questions">
+					   
+					   	<div class="">
+					   	   <div style="position:absolute;">
+					   		<b style="color:#36454f;padding:10px">Q1</b>
+					   		<b>-</b> 
+					   	   </div>
+					   	   <div style="padding: 0 60px;">
+						   	<span >[[${questions[0].question}]]</span>
+						   </div>
+					   	</div>
+					   
+					   
+					   <div class="">
+					   	   <div style="position:absolute;">
+					   		<b style="color:#36454f;padding:10px">Q2</b>
+					   		<b>-</b> 
+					   	   </div>
+					   	   <div style="padding: 0 60px;">
+						   	<span >[[${questions[1].question}]]</span>
+						   </div>
+					   	</div>
+					   
+					   <div class="">
+					   	   <div style="position:absolute;">
+					   		<b style="color:#36454f;padding:10px">Q3</b>
+					   		<b>-</b> 
+					   	   </div>
+					   	   <div style="padding: 0 60px;">
+						   	<span >[[${questions[2].question}]]</span>
+						   </div>
+					   	</div>
+					   	
+					   	
+					   <div class="">
+					   	   <div style="position:absolute;">
+					   		<b style="color:#36454f;padding:10px">Q4</b>
+					   		<b>-</b> 
+					   	   </div>
+					   	   <div style="padding: 0 60px;">
+						   	<span >[[${questions[3].question}]]</span>
+						   </div>
+					   	</div>
+					   	
+					   	
+					   <div class="">
+					   	   <div style="position:absolute;">
+					   		<b style="color:#36454f;padding:10px">Q5</b>
+					   		<b>-</b> 
+					   	   </div>
+					   	   <div style="padding: 0 60px;">
+						   	<span >[[${questions[4].question}]]</span>
+						   </div>
+					   	</div>
+				</div>
+			    <h2 style="padding:5px 10px;">Remarks</h2>
+			    <div class="remarks">
+			       <div  class="remark" th:each="remark: ${subjectMap.value.remarks}">
+			    	<span th:text="${remark}"></span>
+			    </div>
+			    <br>
+		    </div>
+	    </div>
+	 </div>
+<script type="text/javascript">
+</script>
+</body>
+
+</html>

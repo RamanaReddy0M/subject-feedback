@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/studentregistration.css}">
+<link th:href="@{/webjars/bootstrap-icons/1.7.0/font/bootstrap-icons.css}" rel="stylesheet"/>
+
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+
+<script type="text/javascript"
+	th:src="@{/js/adminhome.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/jquery/3.6.0/dist/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+<link rel="icon" type="image/png/ico" sizes="32x32" th:href="@{/favicon.ico}">
+    <title>Student Registration</title>
+</head>
+<body>
+    <div class="container form-container">
+        <h1 style="margin: bottom 25px;" class="h1">Student Registration</h1>
+        <h6 id="message" th:text="${message}" class="text-center text-danger"></h6>
+        <form th:action="@{/save-student}" th:object="${student}" method="POST" onsubmit="return validateStudentForm(this)">
+            <input type="hidden" th:field=*{id}/>
+            <div><input type="text"  placeholder="First Name" th:field="*{firstName}" required autocomplete="off"/> </div>
+            <div><input type="text"  placeholder="Last Name" th:field="*{lastName}" required autocomplete="off"/></div>
+            <div><input type="text" style="text-transform: uppercase" placeholder="Roll No." th:field="*{rollNumber}" autocomplete="off" required minlength="5" maxlength="15"/></div>
+            <br>
+            <div>
+                 <select th:field="*{branch}">
+                    <option disabled value="">Select Branch</option>
+                    <option th:value="'CSE'" th:selected="${branch=='CSE'}">CSE</option>
+                    <option th:value="'ECE'" th:selected="${branch=='ECE'}">ECE</option>
+                    <option th:value="'EEE'" th:selected="${branch=='EEE'}">EEE</option>
+                    <option th:value="'CIVIL'" th:selected="${branch=='CIVIL'}">CIVIL</option>
+                    <option th:value="'MECHANICAL'" th:selected="${branch=='MECHANICAL'}">MECHANICAL</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                   <Select th:field="*{semister}">
+                    <option disabled value="">Select Semister</option>
+                    <option value="1-1" th:selected="${semister=='1-1'}">1-1</option>
+                    <option value="1-2" th:selected="${semister=='1-2'}">1-2</option>
+                    <option value="2-1" th:selected="${semister=='2-1'}">2-1</option>
+                    <option value="2-2" th:selected="${semister=='2-2'}">2-2</option>
+                    <option value="3-1" th:selected="${semister=='3-1'}">3-1</option>
+                    <option value="3-2" th:selected="${semister=='3-2'}">3-2</option>
+                    <option value="4-1" th:selected="${semister=='4-1'}">4-1</option>
+                    <option value="4-2" th:selected="${semister=='4-2'}">4-2</option>
+                </Select>
+                
+            </div> 
+             <div><input type="password" id="password1" minlength="8" maxlength="15"  oninput="setPasswordConfirmValidity();" placeholder="Create Password" required autocomplete="off"></div>
+            <div><input th:field="*{password}" type="password" id="password2" minlength="8" maxlength="15" oninput="setPasswordConfirmValidity();" placeholder="Confirm Password" required autocomplete="off"></div>
+            <br>
+			
+			<button type="submit" class="btn btn-primary">SignUp</button>
+        </form>
+    </div>
+    
+  <script>
+     
+      
+   </script>   
+    
+</body>
+
+</html>

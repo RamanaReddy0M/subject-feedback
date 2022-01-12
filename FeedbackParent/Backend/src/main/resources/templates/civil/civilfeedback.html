@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="fragments :: head">
+
+</head>
+
+<body id="body-pd">
+
+	<header th:replace="fragments :: header"></header>
+	<div th:replace="fragments :: navbar"></div>
+
+	<!--Container Main start-->
+	<div class="height-100 bg-light">
+		<h4>Feedback</h4>
+		<hr>
+		<div>
+			<h6 th:text="${message}" id="message" class="text-danger text-center"></h6>
+		</div>
+		<hr> 
+		
+	 <div class="tableData">
+		<div class="col-sm-12">
+			<div class="px-2" style="display: inline-block">
+				<a th:href="@{/civil/faculty/averages}">
+					<button class="btn btn-secondary" title="Calculate Averages">
+						Average</button>
+				</a>
+			</div>
+			<div class="p-0 mb-2 mt-1 ml-2" style="display: inline-block">
+				<a th:href="@{/civil/feedback/clear}">
+					<button class="btn btn-danger"
+					onclick="return confirm('Are you sure to clear information?')">
+						clear</button>
+				</a>
+			</div>
+		</div>
+		<div style="overflow-x:auto;background-color: var(--white-color);">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th scope="col"><a th:href="@{/civil/feedback/id}">Id</a></th>
+					<th scope="col"><a th:href="@{/civil/feedback/studentId}">S.
+							Id</a></th>
+					<th scope="col"><a th:href="@{/civil/feedback/subjectCode}">
+					        Subject Code
+							</a></th>
+					<th scope="col"><a th:href="@{/civil/feedback/facultyRegId}">
+					        F.Reg.Id
+							</a></th>
+					<th scope="col"><a th:href="@{/civil/feedback/question1}">Q1</a></th>
+					<th scope="col"><a th:href="@{/civil/feedback/question2}">Q2</a></th>
+					<th scope="col"><a th:href="@{/civil/feedback/question3}">Q3</a></th>
+					<th scope="col"><a th:href="@{/civil/feedback/question4}">Q4</a></th>
+					<th scope="col"><a th:href="@{/civil/feedback/question5}">Q5</a></th>
+					<th scope="col"><a th:href="@{/civil/feedback/average}">Average</a></th>
+					<th scope="col"><a th:href="@{/civil/feedback/remarks}">Remarks</a></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="feedback : ${feedbackList}">
+					<th scope="row" th:text="${feedback.id}"></th>
+					<td th:text="${feedback.studentId}"></td>
+					<td th:text="${feedback.subjectCode}"></td>
+					<td th:text="${feedback.facultyRegId}"></td>
+					<td th:text="${feedback.question1}"></td>
+					<td th:text="${feedback.question2}"></td>
+					<td th:text="${feedback.question3}"></td>
+					<td th:text="${feedback.question4}"></td>
+					<td th:text="${feedback.question5}"></td>
+					<td th:text="${feedback.average}"></td>
+					<td th:text="${feedback.remarks}"></td>
+				</tr>
+		</table>
+       </div>
+      </div>
+	</div>
+
+	<!--Container Main end-->
+
+
+<script type="text/javascript">
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="fragments :: head">
+
+</head>
+
+<body id="body-pd" class="" style="background: #000">
+
+	<header th:replace="fragments :: header"></header>
+	<div th:replace="fragments :: navbar"></div>
+
+<!--Container Main start-->
+	<div class="height-100" style="background: #000">
+		<h4>[[${student.branch}]]&nbsp;[[${student.semister}]]</h4>
+		
+		<div>
+			<h6 th:text="${message}" id="message" class="text-danger text-center"></h6>
+			<div th:if="${updated == 'true'}" style="display:flex;overflow:hidden;justify-content: center">
+			<div class="text-center">
+			<img  alt="updated!" th:src="@{/images/magic.gif}"
+			     style="max-width:411px;max-height:300px;border-radius:5%;">
+			</div>
+			</div>
+		</div>
+		
+	<div class="container">
+	  <div class="row mx-auto p-1 justify-content-center">	
+	    
+	     <div th:if="${faculty != null}" th:each="faculty : ${facultyMap}"
+	        style="min-width:300px;max-width:380px;"
+	        class="col"> 
+			  <div class="card mx-auto" th:if="${faculty.key != null}">
+			      <div class="card-img-top">
+			        <img style="height:170px;width:170px;object-fit:cover;object-position: center center"
+			         th:src="@{${faculty.key.imagePath}}"  alt="">
+			       </div>
+			        <div class="card-body">
+			            <p class="card-title" th:text="${faculty.key.firstName}+' '+${faculty.key.lastName}"></p>
+			            <h5 class="card-text" th:text="${faculty.key.designation}" style="font-family: cursive;"></h5>
+			            <p class="card-text" th:text="${faculty.key.department}"></p>
+			            <div th:each="subject : ${faculty.value}" style="margin: 5px 0;">
+			            <a th:href="@{'/questions/'+${subject.facultyRegId}+'/'+${subject.subjectCode}}" class="btn"><b>[[${subject.subjectName}]]</b></a>
+			          </div>
+			        </div>
+			    </div>
+		  </div> 
+		 </div>
+	  </div>
+	  <br>
+	</div>
+<!--Container Main End  -->
+	<script type="text/javascript">
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" th:href="@{/css/facultyregistration.css}">
+
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Roboto">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Sofia">
+<script type="text/javascript"
+	th:src="@{/webjars/jquery/3.6.0/dist/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+<link rel="icon" type="image/png/ico" sizes="32x32" th:href="@{/favicon.ico}">
+
+<title>faculty registration</title>
+</head>
+<body>
+
+	<div class="container form-container"  >
+			<h1 style="margin-top: 5em" class="h1">Faculty Registration</h1>
+			
+		<form th:action="@{/save-faculty}" method="post" th:object="${faculty}" enctype="multipart/form-data"
+				                                 onsubmit="return validateFacultyForm(this)">
+			<input type="hidden" th:field=*{id}/>
+			<div>
+			 <h4 id="message" th:text="${message}" class=""></h4>
+			</div>
+			<div>
+				<input type="text" placeholder="First Name" th:field="*{firstName}" required autocomplete="off"/>
+			</div>
+			<div>
+				<input type="text" name="lastName" placeholder="Last Name" th:field="*{lastName}" required autocomplete="off" />
+			</div>
+			<div>
+				<input type="text" placeholder="Reg. ID" style="text-transform:uppercase" th:field="*{regId}" minlength="5" maxlength="20"  required autocomplete="off"/>
+			</div>
+			<div>
+				<input type="text" placeholder="Designation"  required autocomplete="off"
+					th:field="*{designation}" />
+			</div>
+			<br>
+            <div>
+                 <select th:field="*{department}">
+                    <option disabled value="">Select Department</option>
+                    <option th:value="'CSE'" th:selected="${department=='CSE'}">CSE</option>
+                    <option th:value="'ECE'" th:selected="${department=='ECE'}">ECE</option>
+                    <option th:value="'EEE'" th:selected="${department=='EEE'}">EEE</option>
+                    <option th:value="'H&S'" th:selected="${department=='H&S'}">H&S</option>
+                    <option th:value="'CIVIL'" th:selected="${department=='CIVIL'}">CIVIL</option>
+                    <option th:value="'MECHANICAL'" th:selected="${department=='MECHANICAL'}">MECHANICAL</option>
+                </select>
+            </div>
+            <br>
+			<div><input type="password" id="password1" oninput="setPasswordConfirmValidity();" placeholder="Create Password" required autocomplete="off" minlength="8" maxlength="20"/>
+            </div>
+            <div><input th:field="*{password}" type="password" id="password2" oninput="setPasswordConfirmValidity();" placeholder="Confirm Password" minlength="8" maxlength="20" required autocomplete="off"/>
+            </div>
+            <br>
+            <div class="image">
+              
+              <div style="border: 1px solid #000;text-align:center">
+                  <input type="file" class="custom-file-input"
+                              accept="image/png, image/jpeg, image/jpg"  name="facultyImage" id="facultyImage" />
+               
+	             <div style="border: 1px solid #000;">
+	                 <img th:if="${faculty.photo == null}" style="width: 100px;height:130px;border-radius:10%"
+	                 id="thumbnail" alt="Image Preview" th:src="@{${faculty.imagePath}}">
+	                 <img th:if="${faculty.photo != null}" style="width: 100px;height:130px;border-radius:10%"
+	                 id="thumbnail" alt="Image Preview" th:src="@{${faculty.imagePath}}">
+	             </div>
+               
+              </div>
+			</div>  
+			  <br>			
+			  <button type="submit" class="button">SignUp</button>
+		</form>
+      </div>
+	<script>
+        
+        
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+.card {
+    margin-top: 2em;
+    padding: 1.5em 0.5em 0.5em;
+    border-radius: 2em;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    background: #000;
+    color: orange;
+}
+
+.card img {
+    width: 170px;
+    height:170px;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.card .card-title {
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+.card .btn {
+    border-radius: 2em;
+    background-color: white;
+    color: #111;
+    padding: 0.5em 1.5em;
+}
+
+.card .btn:hover {
+    background-color: orange;
+    color: #111;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}

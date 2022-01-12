@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="fragments :: head">
+</head>
+
+<body id="body-pd">
+	<header th:replace="fragments :: header"></header>
+	<div th:replace="fragments :: navbar"></div>
+	<!--Container Main start-->
+	<div class="height-100 bg-light">
+	<h4>First Year Faculty Details</h4>
+	<div style="padding: 5px;">
+		<div class="container h-100">
+			<div class="d-flex justify-content-center h-100">
+				<form id="searchForm" th:action="@{first-year-faculty/save}"
+					th:object="${newFaculty}" method="POST" onsubmit="">
+					<div class="searchbar">
+						<input class="search_input" type="text" th:field="*{regId}"
+							placeholder="faculty, Reg. Id..." autocomplete="off"> <a
+							onclick="submitButton()" type="submit" href="#"
+							class="search_icon"> <i class="bi bi-plus-circle"></i></a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+		<hr>
+		<div>
+			<h6 th:text="${message}" id="message" class="text-danger text-center"></h6>
+		</div>
+		<hr>
+		<div class="col-sm-12">
+		  <div class="ml-2 mb-3" style="display: inline-block">
+			<a th:href="@{first-year-faculty/refactor-id}">
+			<button class="btn btn-primary">
+			   Refactor-Id
+			</button>
+		    </a>
+		   </div>
+			<div class="ml-2 mb-3" style="display: inline-block">
+				<a th:href="@{/first-year-faculty/export-to-pdf}">
+					<button class="btn btn-primary" title="export to pdf">
+					<i class="bi bi-file-earmark-pdf"></i></button>
+				</a>
+			</div>
+		</div>
+	
+	<div style="overflow-x:auto;background-color: var(--white-color);">
+	<table class="table table-bordered">
+		
+	   <tr>
+	    <th>Id</th>
+	   	<th>Reg. Id</th>
+	   	<th>Name</th>
+	   	<th>Average</th>
+	   	<th colspan="5" class="text-center">Deal with</th>
+	   	<th>Action</th>
+	   </tr>
+		<tr>
+		  <td colspan="4"></td>
+		  <th class="text-center">CSE</th>
+		  <th class="text-center">CIVIL</th>
+		  <th class="text-center">ECE</th>
+		  <th class="text-center">EEE</th>
+		  <th class="text-center">MECH</th>
+		</tr>
+		<tbody >
+			<tr th:if="${facultyList!=null}" th:each="faculty : ${facultyList}">
+			    <div th:if="${faculty != null}">
+			    <td th:text="${faculty.id}"></td>
+				<td th:text="${faculty.regId}"></td>
+				<td th:text="${faculty.firstName}"></td>
+				<td th:text="${faculty.average}"></td>
+				<td class="text-center"><input type="checkbox" th:checked="${faculty.cse}" readonly="readonly" onclick="return false;"></td>
+				<td class="text-center"><input type="checkbox" th:checked="${faculty.civil}" readonly="readonly" onclick="return false;"></td>
+				<td class="text-center"><input type="checkbox" th:checked="${faculty.ece}" readonly="readonly" onclick="return false;"></td>
+				<td class="text-center"><input type="checkbox" th:checked="${faculty.eee}" readonly="readonly" onclick="return false;"></td>
+				<td class="text-center"><input type="checkbox" th:checked="${faculty.mechanical}" readonly="readonly" onclick="return false;"></td>
+				<td sec:authorize="hasAuthority('HOD')"><a
+						th:href="@{'/first-year-faculty/update/'+${faculty.regId}}"><i
+							class="bi bi-pencil"></i></a> &nbsp; &nbsp; <a
+						th:href="@{'/first-year-faculty/delete/'+${faculty.regId}}" 
+						onclick="return deleteConfirm()"> <i class="bi bi-trash"></i></a>
+
+				</td>
+				</div>
+			</tr>
+			</tbody>
+	</table>
+</div>
+</div>
+<!-- container end -->
+<script type="text/javascript">
+</script>
+</body>
+
+</html>

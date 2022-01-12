@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="fragments :: head">
+</head>
+
+<body id="body-pd">
+	<header th:replace="fragments :: header"></header>
+	<div th:replace="fragments :: navbar"></div>
+	<!--Container Main start-->
+	<div class="height-100 bg-light">
+	<h4>[[${pageTitle}]]</h4>
+		<hr>
+		<div th:if="${message != null}">
+			<h6 th:text="${message}" id="message" class="text-danger text-center"></h6>
+		</div>
+		<hr>
+		
+	<div class="semisters">
+	   <div th:class="'item ' + ${firstActive}">
+	   <div class="inside">
+			<a th:href="@{${semister1}}" th:class="'sub_nav_link '"
+							title="1st Semister"> <span
+							class="nav_name">1st Semister</span>
+			</a>
+		</div>
+		</div>
+		
+		<div th:class="'item '  + ${secondActive}">
+		 <div class="inside">
+		    <a th:href="@{${semister2}}" th:class="'sub_nav_link'"
+						title="2nd Semister"> <span
+						class="nav_name">2nd Semister</span>
+		    </a> 
+		  </div>
+		</div>
+	</div>
+	
+   <div class="tableData">
+	<div class="col-sm-12">
+		  <div class="px-2" style="display: inline-block">
+			<a th:href="@{${refactorId}}">
+			<button class="btn btn-secondary">
+			   Refactor-Id
+			</button>
+		    </a>
+		   </div>
+		   
+		   <div class="p-0 mb-2 mt-1 ml-2" style="display: inline-block;">
+			<a th:href="@{${add}}" style="width:30px;height:30px;border-radius:50%;">
+			<button class="btn btn-secondary">
+			   <i class="bi bi-plus-circle-dotted"></i>
+			</button>
+		    </a>
+		   </div>
+		   
+			 <!-- <div class="ml-2 mb-3" style="display: inline-block">
+				<a th:href="@{/cse-first-year-faculty/export-to-pdf}">
+					<button class="btn btn-primary" title="export to pdf">
+					<i class="bi bi-file-earmark-pdf"></i></button>
+				</a>
+			</div>  -->
+		</div>
+	<div style="overflow-x:auto;background-color: var(--white-color);">
+	<table class="table table-bordered">
+		
+	   <tr>
+	    <th>Id</th>
+	   	<th>Code</th>
+	   	<th>Name</th>
+	   	<th>F.RegId</th>
+	   	<th>Average</th>
+	   	<th>Action</th>
+	   </tr>
+		<tr th:if="${subjects != null}" th:each= "subject : ${subjects}">
+		
+		 <div th:if = "${subject != null}">
+		  <td th:text="${subject.id}"></td>
+		  <td th:text="${subject.subjectCode}"></td>
+		  <td th:text="${subject.subjectName}"></td>
+		  <td th:text="${subject.facultyRegId}"></td>
+		  <td th:text="${#numbers.formatDecimal(subject.average, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+		  <td>
+		     &nbsp;&nbsp;&nbsp;&nbsp;
+		    <a th:href="@{${info}+${subject.subjectCode}}"><i class="bi bi-bar-chart-line"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+		    <a th:href="@{${update}+${subject.id}}"><i class="bi bi-pencil"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+		  	<a th:href="@{${delete}+${subject.id}}" th:onclick="return confirm('Are you sure to delete '+[[${subject.subjectName}]]+' ?')"><i class="bi bi-trash"></i></a>
+		  </td>
+		 </div>
+		</tr>
+	</table>
+  </div>
+ </div>
+</div>
+<!-- container end -->
+<script type="text/javascript">
+</script>
+</body>
+
+</html>

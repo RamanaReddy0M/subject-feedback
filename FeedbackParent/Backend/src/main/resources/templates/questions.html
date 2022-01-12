@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="fragments :: head">
+
+</head>
+
+<body id="body-pd">
+
+	<header th:replace="fragments :: header"></header>
+	<div th:replace="fragments :: navbar"></div>
+
+	<!--Container Main start-->
+	<div class="height-100 bg-light">
+		<h4>Questions</h4>
+		<hr>
+		<div>
+			<h6 th:text="${message}" id="message" class="text-danger text-center"></h6>
+		</div>
+		<hr>
+		<div class="col-sm-12">
+		
+		<div style="overflow-x:auto;background-color: var(--white-color);">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Question</th>
+					<th scope="col">Option1</th>
+					<th scope="col">Option2</th>
+					<th scope="col">Option3</th>
+					<th scope="col">Option4</th>
+					<th scope="col">Option5</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each="question : ${questionList}">
+					<th scope="row" th:text="${question.id}"></th>
+					<td th:text="${question.question}"></td>
+					<td th:text="${question.option1}"></td>
+					<td th:text="${question.option2}"></td>
+					<td th:text="${question.option3}"></td>
+					<td th:text="${question.option4}"></td>
+					<td th:text="${question.option5}"></td>
+					<td sec:authorize="hasAuthority('ADMIN')"><a
+						th:href="@{'/question/update/'+${question.id}}"><i
+							class="bi bi-pencil"></i></a>
+					</td>
+				</tr>
+			<tbody>
+		</table>
+		</div>
+	</div>
+   </div>
+	<!--Container Main end-->
+
+<script type="text/javascript">
+
+</script>
+</body>
+
+</html>

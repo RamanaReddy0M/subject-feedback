@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="fragments :: head">
+
+</head>
+
+<body id="body-pd">
+
+	<header th:replace="fragments :: header"></header>
+	<div th:replace="fragments :: navbar"></div>
+
+	<!--Container Main start-->
+	<div class="height-100 bg-light">
+		<h4>Faculty Details</h4>
+		<div style="padding: 5px;">
+			<div class="container h-100">
+				<div class="d-flex justify-content-center h-100">
+					<form id="searchForm" th:action="@{/faculty/search}" method="get"
+						onsubmit="">
+						<div class="searchbar">
+							<input class="search_input" type="text" id="key" th:name="key"
+								placeholder="search..." autocomplete="off"> <a
+								onclick="submitButtonForSearch()" type="submit" href="#"
+								class="search_icon"> <i class="bi bi-search"></i></a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<hr>
+		<div th:if="${message != null}">
+			<h6 th:text="${message}" id="message" class="text-danger text-center"></h6>
+		</div>
+		<hr>
+		<div class="col-sm-12">
+			<div style="display: inline-block" class="ml-2 mb-3">
+				<a th:href="@{/faculty/refactor-id}">
+					<button class="btn btn-secondary">Refactor ID</button>
+				</a>
+			</div>
+
+		 <!-- <div class="ml-2 mb-3" style="display: inline-block">
+				<a th:href="@{/faculty/averages}">
+					<button class="btn btn-primary" title="Calculate Averages" onclick="return confirm('Calculation takes less than 5 seconds, okay?')">
+					Average
+					</button>
+
+				</a>
+			</div>
+			<div class="ml-2 mb-3" style="display: inline-block">
+				<a th:href="@{/faculty/export-to-pdf}">
+					<button class="btn btn-primary" title="export to pdf" onclick="return confirm('Are sure to get pdf of table data?')"><i class="bi bi-file-earmark-pdf"></i></button>
+
+				</a>
+			</div>  -->
+			
+		</div>
+		<div style="overflow-x:auto;background-color: var(--white-color);">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th scope="col"><a th:href="@{/faculty/id}">Id</a></th>
+					<th scope="col"><a th:href="@{/faculty/regId}">Reg. ID</a></th>
+					<th scope="col"><a th:href="@{/faculty/firstName}">
+							Full Name</a></th>
+					<th scope="col"><a th:href="@{/faculty/department}">Department</a></th>
+					<th scope="col"><a th:href="@{/faculty/designation}">Designation</a></th>
+					
+					<!-- <th scope="col"><a th:href="@{/faculty/average}">Average</a></th>
+                    <th scope="col"><a th:href="@{/faculty/good}">Good At</a></th>
+                    <th scope="col"><a th:href="@{/faculty/required}">Improve At</a></th> -->
+                    
+					<th scope="col" sec:authorize="hasAuthority('ADMIN')">Action</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each="faculty : ${facultyList}">
+					<th scope="row" th:text="${faculty.id}"></th>
+					<td th:text="${faculty.regId}"></td>
+					<td th:text="${faculty.firstName}+' '+${faculty.lastName}"></td>
+					<td th:text="${faculty.department}"></td>
+					<td th:text="${faculty.designation}"></td>
+					
+					<!-- <td th:text="${#numbers.formatDecimal(faculty.average, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+					<td th:text="${faculty.good}"></td>
+					<td th:text="${faculty.required}"></td> -->
+					
+					<td sec:authorize="hasAuthority('ADMIN')"><a
+						th:href="@{'/faculty/update/'+${faculty.id}}"><i
+							class="bi bi-pencil"></i></a> &nbsp; &nbsp; <a
+						th:href="@{'/faculty/delete/'+${faculty.id}}" 
+						onclick="return deleteConfirm()"> <i class="bi bi-trash"></i></a>
+
+					</td>
+				</tr>
+			<tbody>
+		</table>
+		</div>
+	</div>
+
+	<!--Container Main end-->
+
+<script type="text/javascript">
+
+</script>
+</body>
+
+</html>

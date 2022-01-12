@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="fragments :: head">
+</head>
+
+<body id="body-pd">
+	<header th:replace="fragments :: header"></header>
+	<div th:replace="fragments :: navbar"></div>
+	<!--Container Main start-->
+	<div class="height-100 bg-light">
+	<h4>[[${pageTitle}]]</h4>
+	
+		<form id="subjectForm" th:action="@{${action}}" th:if="${subject != null}" th:object="${subject}">
+				<div style="padding: 5px;">
+				<div class="container h-100">
+					<div class="d-flex justify-content-center h-100">
+						
+							<div class="searchbar">
+								<input class="search_input" type="text" id="key" th:name="key"
+									placeholder="search..." autocomplete="off"> <a
+									onclick="subjectFormSearch()" type="submit" 
+									class="search_icon"> <i class="bi bi-search"></i></a>
+							</div>
+					</div>
+				</div>
+			</div>
+		
+			<hr>
+			<div>
+				<h6 th:text="${message}" id="message" class="text-danger text-center"></h6>
+			</div>
+			<hr>
+			<br>
+		
+		   <div style="overflow-x:auto;background-color: var(--white-color);" th:if="${not #lists.isEmpty(facultyList)}">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							
+							<th scope="col">Reg. ID</th>
+							<th scope="col">First Name</th>
+							<th scope="col">Last Name</th>
+							<th scope="col">Department</th>
+							<th scope="col">Designation</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr th:each="faculty : ${facultyList}">
+						<td th:text="${faculty.regId}"></td>
+							<td th:text="${faculty.firstName}"></td>
+							<td th:text="${faculty.lastName}"></td>
+							<td th:text="${faculty.department}"></td>
+							<td th:text="${faculty.designation}"></td>
+						</tr>
+					<tbody>
+				  </table>
+		     </div>
+		
+							<div>
+							  <hr> <br>
+							</div>
+		
+		      <input type="hidden" th:field="*{id}"/>
+		      <input type="hidden" th:field="*{total}"/>
+			  <!-- subject code input -->
+			  <div class="form-outline mb-4">
+			    <input type="text" class="form-control" placeholder="subject code" th:field="*{subjectCode}" required autocomplete="Off"/>
+			  </div>
+			  
+			  <div class="form-outline mb-4">
+			    <input type="text" class="form-control" placeholder="subject name" th:field="*{subjectName}" required autocomplete="Off"/>
+			  </div>
+			  
+			  <div class="form-outline mb-4">
+			    <input type="text" class="form-control" placeholder="faculty reg.Id" th:field="*{facultyRegId}"
+			       
+			       required autocomplete="Off"/>
+			  </div> 
+			
+			 <input type="hidden" th:field="*{average}"/>
+			   
+			  <!-- Submit button -->
+			  <button type="submit" class="btn btn-primary btn-block">Save</button>
+		</form>
+	
+	</div>
+<!-- container end -->
+<script type="text/javascript">
+
+</script>
+</body>
+
+</html>

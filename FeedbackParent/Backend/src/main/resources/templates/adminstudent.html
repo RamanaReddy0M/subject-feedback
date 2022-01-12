@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="fragments :: head">
+</head>
+
+<body id="body-pd">
+	<header th:replace="fragments :: header"></header>
+	<div th:replace="fragments :: navbar"></div>
+	<!--Container Main start-->
+	<div class="height-100 bg-light">
+		<h4>Student Details</h4>
+				<div style="padding: 5px;">
+			<div class="container h-100">
+				<div class="d-flex justify-content-center h-100">
+					<form id="searchForm" th:action="@{/student/search}" method="get"
+						>
+						<div class="searchbar">
+							<input class="search_input" type="text" id="key" th:name="key"
+								placeholder="search..." autocomplete="off"> <a
+								onclick="submitButtonForSearch()" type="submit" href="#"
+								class="search_icon"> <i class="bi bi-search"></i></a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div>
+			<h6 th:text="${message}" id="message" class="text-danger text-center"></h6>
+		</div>
+		<hr>
+	<div class="m-3">
+	  <a th:href="@{/student/refactor-id}" >
+	    <button class="btn btn-secondary">
+	 	       Refactor ID
+	 	</button>
+	 	
+	  </a>
+	</div>
+	<div style="overflow-x:auto;background-color: var(--white-color);">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th scope="col" sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/students/id}">Id</a></th>
+					<th scope="col"><a th:href="@{/students/rollNumber}">Roll NO</a></th>
+					<th scope="col"><a th:href="@{/students/firstName}">Full Name</a></th>
+					<th scope="col"><a th:href="@{/students/branch}">Branch</a></th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="student : ${studentList}">
+					<th scope="row" sec:authorize="hasAnyAuthority('ADMIN')" th:text="${student.id}"></th>
+					<td th:text="${student.rollNumber}"></td>
+					<td th:text="${student.firstName}+' '+${student.lastName}"></td>
+					<td th:text="${student.branch}"></td>
+					<td><a th:href="@{'/student/update/'+${student.id}}"><i
+							class="bi bi-pencil"></i></a> &nbsp; &nbsp; <a
+						th:href="@{'/student/delete/'+${student.id}}" onclick="return confirm('Are you sure to delete?')"><i
+							class="bi bi-trash"></i></a></td>
+				</tr>
+		</table>
+		</div>
+	</div>
+	<!--Container Main end-->
+
+<script type="text/javascript">
+
+</script>
+</body>
+
+</html>

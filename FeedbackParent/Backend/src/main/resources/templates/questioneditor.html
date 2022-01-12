@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="fragments :: head">
+
+</head>
+
+<body id="body-pd">
+
+	<header th:replace="fragments :: header"></header>
+	<div th:replace="fragments :: navbar"></div>
+
+	<!--Container Main start-->
+	<div class="height-100 bg-light">
+		<h4>Question [[${tempQuestion.id}]]</h4>
+		<hr>
+		<div>
+			<h6 th:text="${message}" id="message" class="text-danger text-center"></h6>
+		</div>
+		<hr>
+		
+		<div class="container">
+		 <div style="overflow-x:auto;background-color: var(--white-color);">
+		 <form th:action="@{/question/update}" th:object="${tempQuestion}" method="POST">
+		 
+		 	<input type="hidden" th:field="*{id}"/>
+		 	
+		 	<div>
+		 	  <textarea rows="3" cols="80%" type="text" th:field="*{question}"></textarea>
+		 	</div>
+		 	
+		 	<div>
+		 	  <textarea rows="2" cols="60%" type="text"  th:field="*{option1}"></textarea>
+		 	</div>
+		 	<div>
+		 	  <textarea rows="2" cols="60%"  type="text" th:field="*{option2}"></textarea>
+		 	</div>
+		 	
+		 	<div>
+		 	  <textarea rows="2" cols="60%"  type="text" th:field="*{option3}"></textarea>
+		 	</div>
+		    <div>
+		      <textarea rows="2" cols="60%"  type="text"  th:field="*{option4}"></textarea>
+		    </div>
+		    
+		    <div>
+		     <textarea rows="2" cols="60%"  type="text" th:field="*{option5}"></textarea>
+		    </div>
+		    
+		 	<button type="submit" class="btn btn-primary">Update</button>
+		 </form>
+		
+		 </div>
+		</div>
+    </div>
+
+<script type="text/javascript">
+
+</script>
+</body>
+
+</html>
